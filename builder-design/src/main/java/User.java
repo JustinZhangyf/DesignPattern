@@ -3,7 +3,9 @@ public class User {
     private String name;
     private int age;
 
-    private User() {
+    private User(Builder builder) {
+        this.name = builder.name;
+        this.age = builder.age;
     }
 
     public static Builder builder() {
@@ -37,6 +39,11 @@ public class User {
             return this;
         }
 
+        public User build() {
+            check();
+            return new User(this);
+        }
+
         private void check() {
             if (name == null) {
                 throw new IllegalArgumentException("name is null");
@@ -53,15 +60,6 @@ public class User {
             if (age < 18 && name.startsWith("Tom")) {
                 throw new IllegalArgumentException("");
             }
-        }
-
-        public User build() {
-            User user = new User();
-            user.name = this.name;
-            user.age = this.age;
-
-            check();
-            return user;
         }
 
     }
