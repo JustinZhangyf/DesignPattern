@@ -1,7 +1,7 @@
 public class User {
 
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
 
     private User(Builder builder) {
         this.name = builder.name;
