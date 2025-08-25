@@ -25,8 +25,7 @@ public class Main {
         System.out.println(updateSQL);
 
 
-
-        System.out.println("==========DSL 优化==========");
+        System.out.println("==========dsl 优化==========");
 
         String select = SQL.select("name", "age").from("user").where("gender = 'Male'").build();
         System.out.println(select);
