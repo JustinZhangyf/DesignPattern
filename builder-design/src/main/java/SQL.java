@@ -1,6 +1,4 @@
-import tech.insight.sql.builder.SQLBuilder;
-import tech.insight.sql.builder.SelectSQLBuilder;
-import tech.insight.sql.builder.UpdateSQLBuilder;
+import tech.insight.sql.builder.*;
 import tech.insight.sql.enums.SQLType;
 
 public class SQL {
@@ -24,5 +22,8 @@ public class SQL {
         return new SQLBuilder(sqlType);
     }
 
+    public static FromStage updateBuilder() {
+        return new UpdateBuilder();
+    }
 
 }

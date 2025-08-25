@@ -1,3 +1,5 @@
+package tech.insight.sql.builder;
+
 public interface SetStage {
 
     SetStage set(String column, String value);

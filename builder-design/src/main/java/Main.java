@@ -35,5 +35,17 @@ public class Main {
         String update = SQL.update().table("user").set("name", "张三").set("age", "18").where("gender = 'Male'").build();
         System.out.println(update);
 
+
+        System.out.println("==========dsl 优化2==========");
+
+        String build = SQL.updateBuilder()
+                .from("user")
+                .where("gender = 'Male'")
+                .set("name", "张三")
+                .set("age", "18")
+                .build();
+
+        System.out.println(build);
+
     }
 }
