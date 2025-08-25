@@ -8,10 +8,100 @@ public class SQL {
 
     }
 
+    // 拆分builder成独立的几个不同的builder,以免select和update不同的方法可以互相调用，
+    // 比如在select中调用set方法，在update中调用select方法
+    public static SelectSQLBuilder select() {
+        return new SelectSQLBuilder();
+    }
+
+    public static UpdateSQLBuilder update() {
+        return new UpdateSQLBuilder();
+    }
+
+
     public static SQLBuilder builder(SQLType sqlType) {
         return new SQLBuilder(sqlType);
     }
 
+
+    public static class SelectSQLBuilder {
+        private String[] columns;
+
+        private String table;
+
+        private String where;
+
+        private SelectSQLBuilder() {
+
+        }
+
+        public SelectSQLBuilder select(String... columns) {
+            this.columns = columns;
+            return this;
+        }
+
+        public SelectSQLBuilder from(String table) {
+            this.table = table;
+            return this;
+        }
+
+        public SelectSQLBuilder where(String where) {
+            this.where = where;
+            return this;
+        }
+
+        public String build() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("SELECT ").append(String.join(", ", columns))
+                    .append(" FROM ").append(table);
+            if (where != null) {
+                sb.append(" WHERE ").append(where).append(";");
+            }
+            return sb.toString();
+        }
+
+    }
+
+    public static class UpdateSQLBuilder {
+        private String table;
+
+        private Map<String, String> setMap = new LinkedHashMap<>();
+
+        private String where;
+
+        private UpdateSQLBuilder() {
+
+        }
+
+        public UpdateSQLBuilder table(String table) {
+            this.table = table;
+            return this;
+        }
+
+        public UpdateSQLBuilder set(String key, String value) {
+            setMap.put(key, value);
+            return this;
+        }
+
+        public UpdateSQLBuilder where(String where) {
+            this.where = where;
+            return this;
+        }
+
+        public String build() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("UPDATE ").append(table).append(" SET ");
+            String setL = setMap.entrySet().stream()
+                    .map(entry -> entry.getKey() + " = " + entry.getValue())
+                    .collect(Collectors.joining(", "));
+            sb.append(setL);
+            if (where != null) {
+                sb.append(" WHERE ").append(where).append(";");
+            }
+            return sb.toString();
+        }
+
+    }
 
     public static class SQLBuilder {
 

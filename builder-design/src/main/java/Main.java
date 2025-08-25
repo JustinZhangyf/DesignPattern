@@ -24,5 +24,12 @@ public class Main {
                 .build();
         System.out.println(updateSQL);
 
+
+        String select = SQL.select().select("name", "age").from("user").where("gender = 'Male'").build();
+        System.out.println(select);
+
+        String update = SQL.update().table("user").set("name", "张三").set("age", "18").where("gender = 'Male'").build();
+        System.out.println(update);
+
     }
 }
