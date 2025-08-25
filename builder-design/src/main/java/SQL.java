@@ -1,6 +1,9 @@
-import tech.insight.sql.builder.*;
+import tech.insight.sql.builder.impl.SQLBuilder;
+import tech.insight.sql.builder.impl.SelectSQLBuilder;
+import tech.insight.sql.builder.impl.UpdateSQLBuilder;
 import tech.insight.sql.enums.SQLType;
 
+@Deprecated
 public class SQL {
 
     private SQL() {
@@ -20,10 +23,6 @@ public class SQL {
 
     public static SQLBuilder builder(SQLType sqlType) {
         return new SQLBuilder(sqlType);
-    }
-
-    public static FromStage updateBuilder() {
-        return new UpdateBuilder();
     }
 
 }

@@ -1,35 +1,36 @@
-package tech.insight.sql.builder;
+package tech.insight.sql.builder.impl;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class UpdateBuilder implements SetStage, FromStage, WhereStage {
+@Deprecated
+public class UpdateSQLBuilder {
     private String table;
 
     private Map<String, String> setMap = new LinkedHashMap<>();
 
     private String where;
 
-    @Override
-    public WhereStage from(String table) {
+    public UpdateSQLBuilder() {
+
+    }
+
+    public UpdateSQLBuilder table(String table) {
         this.table = table;
         return this;
     }
 
-    @Override
-    public SetStage set(String column, String value) {
-        this.setMap.put(column, value);
+    public UpdateSQLBuilder set(String key, String value) {
+        setMap.put(key, value);
         return this;
     }
 
-    @Override
-    public SetStage where(String where) {
+    public UpdateSQLBuilder where(String where) {
         this.where = where;
         return this;
     }
 
-    @Override
     public String build() {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE ").append(table).append(" SET ");
@@ -42,4 +43,5 @@ public class UpdateBuilder implements SetStage, FromStage, WhereStage {
         }
         return sb.toString();
     }
+
 }

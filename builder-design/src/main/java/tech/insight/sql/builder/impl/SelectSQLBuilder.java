@@ -1,5 +1,6 @@
-package tech.insight.sql.builder;
+package tech.insight.sql.builder.impl;
 
+@Deprecated
 public class SelectSQLBuilder {
 
     private String[] columns;

@@ -1,4 +1,4 @@
-package tech.insight.sql.builder;
+package tech.insight.sql.builder.impl;
 
 import tech.insight.sql.enums.SQLType;
 
@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class SQLBuilder {
 
     private SQLType sqlType;

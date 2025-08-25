@@ -1,6 +1,8 @@
 package tech.insight.sql.builder;
 
-public interface WhereStage {
+public interface WhereStage extends BuildStage {
 
-    SetStage where(String where);
+    WhereStage where(String where, String operator);
+
+    WhereStage where(String where);
 }
