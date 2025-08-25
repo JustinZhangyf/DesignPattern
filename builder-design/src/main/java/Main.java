@@ -1,3 +1,5 @@
+import tech.insight.sql.enums.SQLType;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -8,14 +10,14 @@ public class Main {
         System.out.println(user.getName() + " " + user.getAge());
 
 
-        String selectSQL = SQL.builder(SQL.SQLType.SELECT)
+        String selectSQL = SQL.builder(SQLType.SELECT)
                 .columns("name", "age")
                 .table("user")
                 .where("gender = 'Male'")
                 .build();
         System.out.println(selectSQL);
 
-        String updateSQL = SQL.builder(SQL.SQLType.UPDATE)
+        String updateSQL = SQL.builder(SQLType.UPDATE)
                 .columns("name", "age")
                 .table("user")
                 .set("name", "张三")
