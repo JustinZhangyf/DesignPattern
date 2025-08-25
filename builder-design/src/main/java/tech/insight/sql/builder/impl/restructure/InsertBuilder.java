@@ -8,9 +8,20 @@ import java.util.Map;
 
 public class InsertBuilder implements FromStage<AssembleStage>, AssembleStage {
 
+    private static final InsertBuilder INSTANCE = new InsertBuilder();
+
     private String table;
 
     private Map<String, String> setMap = new LinkedHashMap<>();
+
+    private InsertBuilder() {
+    }
+
+    public static InsertBuilder create() {
+        INSTANCE.table = null;
+        INSTANCE.setMap = new LinkedHashMap<>();
+        return INSTANCE;
+    }
 
     @Override
     public AssembleStage from(String table) {

@@ -14,23 +14,23 @@ public class SQLQuery {
     private SQLQuery() {
     }
 
+    public static FromStage<AssembleStage> insert() {
+        return InsertBuilder.create();
+    }
+
     public static FromStage<WhereStage> select() {
-        return new SelectBuilder();
+        return SelectBuilder.create();
     }
 
     public static FromStage<WhereStage> multiSelect(String... columns) {
-        return new SelectBuilder(columns);
+        return SelectBuilder.create(columns);
     }
 
     public static FromStage<SetStage> update() {
-        return new UpdateBuilder();
-    }
-
-    public static FromStage<AssembleStage> insert() {
-        return new InsertBuilder();
+        return UpdateBuilder.create();
     }
 
     public static FromStage<WhereStage> delete() {
-        return new DeleteBuilder();
+        return DeleteBuilder.create();
     }
 }

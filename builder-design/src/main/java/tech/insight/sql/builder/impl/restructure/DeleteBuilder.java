@@ -5,11 +5,19 @@ import tech.insight.sql.builder.FromStage;
 import tech.insight.sql.builder.WhereStage;
 
 public class DeleteBuilder implements FromStage<WhereStage>, WhereStage {
+    private static final DeleteBuilder INSTANCE = new DeleteBuilder();
 
     private String table;
 
     private String where;
 
+    private DeleteBuilder() {
+    }
+    public static DeleteBuilder create() {
+        INSTANCE.table = null;
+        INSTANCE.where = null;
+        return INSTANCE;
+    }
     @Override
     public WhereStage from(String table) {
         this.table = table;

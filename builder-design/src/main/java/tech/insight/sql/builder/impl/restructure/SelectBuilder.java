@@ -7,6 +7,7 @@ import tech.insight.sql.builder.WhereStage;
 
 public class SelectBuilder implements FromStage<WhereStage>, SelectStage, WhereStage {
 
+    private static final SelectBuilder INSTANCE = new SelectBuilder();
 
     String[] columns;
 
@@ -14,14 +15,27 @@ public class SelectBuilder implements FromStage<WhereStage>, SelectStage, WhereS
 
     String where;
 
-    public SelectBuilder() {
+    private SelectBuilder() {
         select();
     }
 
-    public SelectBuilder(String... columns) {
+    private SelectBuilder(String... columns) {
         multiSelect(columns);
     }
 
+    public static SelectBuilder create() {
+        INSTANCE.columns = new String[]{"*"};
+        INSTANCE.table = null;
+        INSTANCE.where = null;
+        return INSTANCE;
+    }
+
+    public static SelectBuilder create(String... columns) {
+        INSTANCE.columns = columns;
+        INSTANCE.table = null;
+        INSTANCE.where = null;
+        return INSTANCE;
+    }
 
 
     @Override

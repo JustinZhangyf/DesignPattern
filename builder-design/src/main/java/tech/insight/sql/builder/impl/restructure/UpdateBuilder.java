@@ -11,11 +11,23 @@ import java.util.stream.Collectors;
 
 public class UpdateBuilder implements FromStage<SetStage>, SetStage, WhereStage {
 
+    private static final UpdateBuilder INSTANCE = new UpdateBuilder();
+
     private String table;
 
     private Map<String, String> setMap = new LinkedHashMap<>();
 
     private String where;
+
+    private UpdateBuilder() {
+    }
+
+    public static UpdateBuilder create() {
+        INSTANCE.table = null;
+        INSTANCE.where = null;
+        INSTANCE.setMap.clear();
+        return INSTANCE;
+    }
 
     @Override
     public SetStage from(String table) {
