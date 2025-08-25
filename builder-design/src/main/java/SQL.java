@@ -10,8 +10,8 @@ public class SQL {
 
     // 拆分builder成独立的几个不同的builder,以免select和update不同的方法可以互相调用，
     // 比如在select中调用set方法，在update中调用select方法
-    public static SelectSQLBuilder select() {
-        return new SelectSQLBuilder();
+    public static SelectSQLBuilder select(String... columns) {
+        return new SelectSQLBuilder(columns);
     }
 
     public static UpdateSQLBuilder update() {
@@ -31,13 +31,8 @@ public class SQL {
 
         private String where;
 
-        private SelectSQLBuilder() {
-
-        }
-
-        public SelectSQLBuilder select(String... columns) {
+        private SelectSQLBuilder(String... columns) {
             this.columns = columns;
-            return this;
         }
 
         public SelectSQLBuilder from(String table) {
