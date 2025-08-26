@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>builder-design</module>
+        <module>decorator-pattern</module>
     </modules>
 
     <properties>
