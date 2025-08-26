@@ -1,6 +1,8 @@
+import java.util.HashSet;
+
 public class Main {
     public static void main(String[] args) {
-        HistorySet<String> strSet = new HistorySet<>();
+        HistorySet<String> strSet = new HistorySet<>(new HashSet<>());
 
         strSet.add("James");
         strSet.add("Tom");

@@ -9,50 +9,53 @@ import java.util.*;
 
 public class HistorySet<E> implements Set<E> {
 
-    private final Set<E> set = new HashSet<>();
+    private final Set<E> delegate;
 
     private final List<E> removeList = new ArrayList<>();
 
+    public HistorySet(Set<E> set) {
+        this.delegate = set;
+    }
 
     @Override
     public int size() {
-        return set.size();
+        return delegate.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return set.isEmpty();
+        return delegate.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return set.contains(o);
+        return delegate.contains(o);
     }
 
     @Override
     public Iterator<E> iterator() {
-        return set.iterator();
+        return delegate.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        return set.toArray();
+        return delegate.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return set.toArray(a);
+        return delegate.toArray(a);
     }
 
     @Override
     public boolean add(E e) {
-        return set.add(e);
+        return delegate.add(e);
     }
 
     @Override
     public boolean remove(Object o) {
         // 注意这里的remove需要成功才记录到history中
-        if (set.remove(o)) {
+        if (delegate.remove(o)) {
             removeList.add((E) o);
             return true;
         } else {
@@ -62,33 +65,33 @@ public class HistorySet<E> implements Set<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return set.containsAll(c);
+        return delegate.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return set.addAll(c);
+        return delegate.addAll(c);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return set.retainAll(c);
+        return delegate.retainAll(c);
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return set.removeAll(c);
+        return delegate.removeAll(c);
     }
 
     @Override
     public void clear() {
-        set.clear();
+        delegate.clear();
     }
 
     @Override
     public String toString() {
         return "HistorySet{" +
-                "set=" + set +
+                "set=" + delegate +
                 ", removeList=" + removeList +
                 '}';
     }
