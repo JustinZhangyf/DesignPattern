@@ -46,6 +46,7 @@ public class BufferedFileInputStream extends InputStream {
     }
 
     private boolean bufferCanBeRead() {
+        return false;
     }
 
     @Override
