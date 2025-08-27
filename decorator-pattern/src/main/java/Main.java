@@ -48,7 +48,7 @@ public class Main {
 
     // 理解Java IO流的装饰器模式
     public static void readFile() {
-        File file = new File("C:\\Users\\Sweety\\IdeaProjects\\DesignPattern\\decorator-pattern\\jvm.pdf");
+        File file = new File("decorator-pattern/jvm.pdf");
         long epochMilli = Instant.now().toEpochMilli();
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             while (true) {
