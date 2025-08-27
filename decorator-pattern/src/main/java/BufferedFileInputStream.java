@@ -1,4 +1,3 @@
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,7 +10,7 @@ import java.io.InputStream;
  */
 public class BufferedFileInputStream extends InputStream {
 
-    private int[] buffer = new int[8192];
+    private byte[] buffer = new byte[8192];
     //    用于记录缓冲区中已经读取的字节数
     private int pos = -1;
     //    用于记录缓冲区中可以读取的字节数
@@ -37,16 +36,27 @@ public class BufferedFileInputStream extends InputStream {
         return readFromBuffer();
     }
 
-    private void refreshBuffer() {
-
+    private void refreshBuffer() throws IOException {
+        this.capacity = this.inputStream.read(buffer);
+        this.pos = 0;
     }
 
     private int readFromBuffer() {
-        return 0;
+        int b = buffer[pos];
+        pos++;
+//        buffer是字节数组，有符号位，因此需要将其转换为无符号位
+        return b & 0xFF;
     }
 
     private boolean bufferCanBeRead() {
-        return false;
+        if (capacity == -1) {
+            return false;
+        }
+        // 缓冲区中已经读取的字节数等于缓冲区中可以读取的字节数，则缓冲区中已经没有字节可以读取，返回false
+        if (pos == capacity) {
+            return false;
+        }
+        return true;
     }
 
     @Override
