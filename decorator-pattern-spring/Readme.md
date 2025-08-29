@@ -1,0 +1,7 @@
+1. 现有需求：@RequestBody注解接收了一个map, 需要在request映射到map的时候自动添加一组key-value为timestamp-当前时间戳
+2. 分析：debug spring的请求处理流程，看spring是如何映射request到参数的
+   1.  debug 发现在InvocableHandlerMethod类中invokeForRequest方法中Object returnValue = doInvoke(args);此时args已经是HashMap了，所以逐步向上debug寻找args来源
+   2. 
+3. 解决方案：使用spring的HandlerMethodArgumentResolver接口，重写supportsParameter和resolveArgument方法
+3. 通过@Component注解将自定义的HandlerMethodArgumentResolver实现类交给spring管理
+   4. 通过实现WebMvcConfigurer接口的addArgumentResolvers方法，将自定义的HandlerMethodArgumentResolver实现类添加到spring的处理器链中
